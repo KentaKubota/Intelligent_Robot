@@ -9,9 +9,7 @@ int comp( const void *c1, const void *c2 );
 
 float PSD_high_Value()
 {
-    //float value = PSD_high_Value();
     return PSD_high.read();
-    //return value;
 }
 
 
