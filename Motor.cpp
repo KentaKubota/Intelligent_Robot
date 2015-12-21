@@ -109,7 +109,9 @@ void SearchTurn_r()
     while(-89 <= (tht1 * 180 / PI)){   //right side search
         targetSpeed_r = -110;
         targetSpeed_l = 110;//80 -> 110
-        get_PSD0 = PSD_low_Value();
+
+        if(0.20 < PSD_high_value() )
+            get_PSD0 = PSD_low_Value();
         get_angle0 = tht1 * 180 / PI;
 
         if(get_PSD1 < get_PSD0){
