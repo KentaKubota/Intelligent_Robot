@@ -32,9 +32,9 @@ int main()
     while(1){
         switch(state){
             case FREE_BALL:
-                LineTrace(4);
-                ServoBallThrow();
-                LineTrace(1);
+                //LineTrace(4);
+                //ServoBallThrow();
+                //LineTrace(1);
                 state = BALL_SEARCH;
                 break;
 
