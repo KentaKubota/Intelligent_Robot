@@ -110,8 +110,10 @@ void SearchTurn_r()
         targetSpeed_r = -110;
         targetSpeed_l = 110;//80 -> 110
 
-        if(0.20 < PSD_high_Value() )
+        if(0.12 < PSD_high_Value() ){
             get_PSD0 = PSD_low_Value();
+            printf("up %f down %f\n",PSD_high_Value(), get_PSD0);
+        }
         get_angle0 = tht1 * 180 / PI;
 
         if(get_PSD1 < get_PSD0){
@@ -143,7 +145,9 @@ void SearchTurn_l()
     while(89 >= (tht1 * 180 / PI)){   //right side search
         targetSpeed_r = 110;
         targetSpeed_l = -110;//80 -> 110
-        get_PSD0 = PSD_low_Value();
+
+        if(0.12 < PSD_high_Value() )
+            get_PSD0 = PSD_low_Value();
         get_angle0 = tht1 * 180 / PI;
 
         if(get_PSD1 < get_PSD0){
