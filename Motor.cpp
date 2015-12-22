@@ -104,22 +104,26 @@ void SearchTurn_r()
     get_angle0 = get_angle1 = 0; 
     x1 = y1 = tht1 = 0;
     x0 = y0 = tht0 = 0;
+    float value;
 
     wait(0.1);//0.5 -> 0.1
     while(-89 <= (tht1 * 180 / PI)){   //right side search
         targetSpeed_r = -110;
         targetSpeed_l = 110;//80 -> 110
 
-        if(0.2 < PSD_high_Value())
-            get_PSD0 = PSD_low_Value();
-        get_angle0 = tht1 * 180 / PI;
 
+        value = PSD_high_Value();
+        if(0.20 < value){
+            printf("%f\n",value);
+            get_PSD0 = PSD_low_Value();
+            get_angle0 = tht1 * 180 / PI;
+        }
         if(get_PSD1 < get_PSD0){
             get_PSD1 = get_PSD0;
             get_angle1 = get_angle0; 
         }
     }
-    if(get_PSD1 < 0.235) get_angle1 = 0.0;//0.240
+    if(get_PSD1 < 0.215) get_angle1 = 0.0;//0.240
     //printf("psd = %f angle = %f\n",get_PSD1, get_angle1);
     targetSpeed_r = targetSpeed_l = 0;
     wait(0.1);//0.2 -> 0.1
@@ -138,22 +142,27 @@ void SearchTurn_l()
     get_angle0 = get_angle1 = 0; 
     x1 = y1 = tht1 = 0;
     x0 = y0 = tht0 = 0;
+    float value;
 
     wait(0.1);//0.5 -> 0.1
     while(89 >= (tht1 * 180 / PI)){   //right side search
         targetSpeed_r = 110;
         targetSpeed_l = -110;//80 -> 110
 
-        if(0.2 < PSD_high_Value())
+
+        value = PSD_high_Value();
+        if(0.20 < value){
+            printf("%f\n",value);
             get_PSD0 = PSD_low_Value();
-        get_angle0 = tht1 * 180 / PI;
+            get_angle0 = tht1 * 180 / PI;
+        }
 
         if(get_PSD1 < get_PSD0){
             get_PSD1 = get_PSD0;
             get_angle1 = get_angle0; 
         }
     }
-    if(get_PSD1 < 0.235) get_angle1 = 0.0; //0.240
+    if(get_PSD1 < 0.215) get_angle1 = 0.0; //0.240
     //printf("psd = %f angle = %f\n",get_PSD1, get_angle1);
     targetSpeed_r = targetSpeed_l = 0;
     wait(0.1);//0.2 -> 0.1
