@@ -117,7 +117,7 @@ void SearchTurn_r()
             get_angle1 = get_angle0; 
         }
     }
-    if(get_PSD1 < 0.215) get_angle1 = 0.0;//0.240
+    if(get_PSD1 < 0.228) get_angle1 = 0.0;//0.240
     //printf("psd = %f angle = %f\n",get_PSD1, get_angle1);
     targetSpeed_r = targetSpeed_l = 0;
     wait(0.1);//0.2 -> 0.1
@@ -149,7 +149,7 @@ void SearchTurn_l()
             get_angle1 = get_angle0; 
         }
     }
-    if(get_PSD1 < 0.215) get_angle1 = 0.0; //0.240
+    if(get_PSD1 < 0.228) get_angle1 = 0.0; //0.240
     //printf("psd = %f angle = %f\n",get_PSD1, get_angle1);
     targetSpeed_r = targetSpeed_l = 0;
     wait(0.1);//0.2 -> 0.1
@@ -165,7 +165,7 @@ void SearchTurn_l()
 
 void BallApproach()
 {
-    float HandDistance = 185.0, Diff; //175.0
+    float HandDistance = 193.0, Diff; //175.0
     float balldistance = 66.294 * pow((double)get_PSD1, -1.218);
     int waitflag;
 
@@ -187,7 +187,7 @@ void BallApproach()
     else
     {
         ServoForkDown();
-        while(x1 <= Diff + 55)//60 -> 40
+        while(x1 <= Diff + 35)//60 -> 40
             targetSpeed_r = targetSpeed_l = 140;//100 -> 140
             waitflag = OFF;
     }
