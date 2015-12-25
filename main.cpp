@@ -39,7 +39,7 @@ int main()
 
             case BALL_SEARCH:
                 
-                if(cup == OFF && timer >= 320){
+                if((cup == OFF && timer >= 320) || (last_distance / 157 == 8)){
                     state = TIMER;
                     break;
                 }
@@ -54,7 +54,7 @@ int main()
                 else{
                     SearchTurn_l();
                     if(get_angle1 == 0){
-                        MoveLineTrace(distance);
+                        if(last_distance / 157 != 7) MoveLineTrace(distance);
                         last_distance += 157;
                         search_side = RIGHT;
                         deptharea = ON;
