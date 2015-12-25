@@ -117,7 +117,7 @@ void SearchTurn_r()
             get_angle1 = get_angle0; 
         }
     }
-    if(get_PSD1 < 0.228) get_angle1 = 0.0;//0.240
+    if(get_PSD1 < 0.220) get_angle1 = 0.0;//0.240
     //printf("psd = %f angle = %f\n",get_PSD1, get_angle1);
     targetSpeed_r = targetSpeed_l = 0;
     wait(0.1);//0.2 -> 0.1
@@ -149,7 +149,7 @@ void SearchTurn_l()
             get_angle1 = get_angle0; 
         }
     }
-    if(get_PSD1 < 0.228) get_angle1 = 0.0; //0.240
+    if(get_PSD1 < 0.220) get_angle1 = 0.0; //0.240
     //printf("psd = %f angle = %f\n",get_PSD1, get_angle1);
     targetSpeed_r = targetSpeed_l = 0;
     wait(0.1);//0.2 -> 0.1
@@ -158,7 +158,7 @@ void SearchTurn_l()
         x1 = y1 = tht1 = 0;
         x0 = y0 = tht0 = 0;
     }
-    else Turn(-86 + get_angle1, 160);//if you reduce the value, the curve is weak  - 173.5
+    else Turn(-84 + get_angle1, 160);//if you reduce the value, the curve is weak  - 173.5
 }//120 -> 160
 
 
@@ -187,7 +187,7 @@ void BallApproach()
     else
     {
         ServoForkDown();
-        while(x1 <= Diff + 35)//60 -> 40
+        while(x1 <= Diff + 22)//60 -> 40
             targetSpeed_r = targetSpeed_l = 140;//100 -> 140
             waitflag = OFF;
     }

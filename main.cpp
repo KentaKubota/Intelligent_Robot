@@ -39,7 +39,7 @@ int main()
 
             case BALL_SEARCH:
                 
-                if((cup == OFF && timer >= 320) || (last_distance / 157 == 8)){
+                if(timer >= 60){
                     state = TIMER;
                     break;
                 }
@@ -54,8 +54,10 @@ int main()
                 else{
                     SearchTurn_l();
                     if(get_angle1 == 0){
-                        if(last_distance / 157 != 7) MoveLineTrace(distance);
-                        last_distance += 157;
+                        if(last_distance / 157 < 7){
+                            MoveLineTrace(distance);
+                            last_distance += 157;
+                        }
                         search_side = RIGHT;
                         deptharea = ON;
                         break;
@@ -228,6 +230,11 @@ int main()
 
             case TIMER:
                 Turn(170, 200);
+                if(ballcolor_1st != NO_BALL){
+                     state = BALL_SHOOT;
+                     ballcount = AIM_NUM;
+                     break;
+                }
                 if(deptharea == ON) LineTrace(4);
                 else LineTrace(3);
 
