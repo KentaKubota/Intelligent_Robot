@@ -31,7 +31,7 @@ int main()
     float psd_dis;
 
     while(1){
-        value = PSD_high_Value();
+        value = PSD_Value();
         //psd_dis = 66.294 * pow((double)value, -1.218);
         printf("%f\n", value);
         wait(0.1);

@@ -23,8 +23,7 @@ void ServoForkDown();
 void ServoForkAppeal();
 void ServoForkCatch();
 
-float PSD_low_Value();
-float PSD_high_Value();
+float PSD_Value();
 
 int WhatColor();
 

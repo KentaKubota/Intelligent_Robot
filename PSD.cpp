@@ -2,23 +2,17 @@
 #include "Function.h"
  
 #define NUM 9
-AnalogIn PSD_low(p16), PSD_high(p20);     
+AnalogIn PSD(p16);     
 
 
 int comp( const void *c1, const void *c2 );
 
-float PSD_high_Value()
-{
-    return PSD_high.read();
-}
-
-
-float PSD_low_Value()
+float PSD_Value()
 {
     float sort[NUM] = {0};
 
     for(int i = 0; i < NUM; i++)
-        sort[i] = PSD_low.read();
+        sort[i] = PSD.read();
     qsort(sort, NUM, sizeof(float), comp);
     //printf("%f\n",sort[4]);
 

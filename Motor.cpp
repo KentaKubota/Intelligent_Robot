@@ -104,20 +104,14 @@ void SearchTurn_r()
     get_angle0 = get_angle1 = 0; 
     x1 = y1 = tht1 = 0;
     x0 = y0 = tht0 = 0;
-    float value;
 
     wait(0.1);//0.5 -> 0.1
-    while(-89 <= (tht1 * 180 / PI)){   //right side search
+    while(-86 <= (tht1 * 180 / PI)){   //right side search
         targetSpeed_r = -110;
         targetSpeed_l = 110;//80 -> 110
 
-
-        value = PSD_high_Value();
-        if(0.20 < value){
-            printf("%f\n",value);
-            get_PSD0 = PSD_low_Value();
-            get_angle0 = tht1 * 180 / PI;
-        }
+        get_PSD0 = PSD_Value();
+        get_angle0 = tht1 * 180 / PI;
         if(get_PSD1 < get_PSD0){
             get_PSD1 = get_PSD0;
             get_angle1 = get_angle0; 
@@ -132,7 +126,7 @@ void SearchTurn_r()
         x1 = y1 = tht1 = 0;
         x0 = y0 = tht0 = 0;
     }
-    else Turn(88 + get_angle1, 160);//if you reduce the value, the curve is weak  - 173.5
+    else Turn(86 + get_angle1, 160);//if you reduce the value, the curve is weak  - 173.5
 }//90 -> 86
 
 
@@ -142,21 +136,14 @@ void SearchTurn_l()
     get_angle0 = get_angle1 = 0; 
     x1 = y1 = tht1 = 0;
     x0 = y0 = tht0 = 0;
-    float value;
 
     wait(0.1);//0.5 -> 0.1
-    while(89 >= (tht1 * 180 / PI)){   //right side search
+    while(85 >= (tht1 * 180 / PI)){   //right side search
         targetSpeed_r = 110;
         targetSpeed_l = -110;//80 -> 110
 
-
-        value = PSD_high_Value();
-        if(0.20 < value){
-            printf("%f\n",value);
-            get_PSD0 = PSD_low_Value();
-            get_angle0 = tht1 * 180 / PI;
-        }
-
+        get_PSD0 = PSD_Value();
+        get_angle0 = tht1 * 180 / PI;
         if(get_PSD1 < get_PSD0){
             get_PSD1 = get_PSD0;
             get_angle1 = get_angle0; 
@@ -171,14 +158,14 @@ void SearchTurn_l()
         x1 = y1 = tht1 = 0;
         x0 = y0 = tht0 = 0;
     }
-    else Turn(-88 + get_angle1, 160);//if you reduce the value, the curve is weak  - 173.5
+    else Turn(-86 + get_angle1, 160);//if you reduce the value, the curve is weak  - 173.5
 }//120 -> 160
 
 
 
 void BallApproach()
 {
-    float HandDistance = 170.0, Diff; //175.0
+    float HandDistance = 185.0, Diff; //175.0
     float balldistance = 66.294 * pow((double)get_PSD1, -1.218);
     int waitflag;
 
@@ -200,7 +187,7 @@ void BallApproach()
     else
     {
         ServoForkDown();
-        while(x1 <= Diff + 40)//60 -> 40
+        while(x1 <= Diff + 55)//60 -> 40
             targetSpeed_r = targetSpeed_l = 140;//100 -> 140
             waitflag = OFF;
     }

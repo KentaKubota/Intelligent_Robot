@@ -27,20 +27,19 @@ int main()
 /* Start Motor Ctrl */
     SwitchMotorCtrl(ON);    
 
-
     state = FREE_BALL;
     while(1){
         switch(state){
             case FREE_BALL:
-                //LineTrace(4);
-                //ServoBallThrow();
-                //LineTrace(1);
+                LineTrace(4);
+                ServoBallThrow();
+                LineTrace(1);
                 state = BALL_SEARCH;
                 break;
 
             case BALL_SEARCH:
                 
-                if(cup == OFF && timer >= 330){
+                if(cup == OFF && timer >= 320){
                     state = TIMER;
                     break;
                 }
@@ -83,8 +82,8 @@ int main()
                     break;
                 }
                 else if(cup == OFF){
-                    if(get_angle1 <= 0) Turn(-get_angle1 - 5, 110);// 10 -> 5
-                    else Turn(-get_angle1 + 5, 110); 
+                    if(get_angle1 <= 0) Turn(-get_angle1 - 7, 110);// 10 -> 5
+                    else Turn(-get_angle1 + 7, 110); 
                     cup = ON;                            
                     state = BALL_SEARCH;                 
                     printf("color = %d\n",ballcolor_1st);
@@ -248,7 +247,6 @@ int main()
 
         if(end_flag == ON) break;
     }
-
     printf("\nProgram has finished");
 }
 
