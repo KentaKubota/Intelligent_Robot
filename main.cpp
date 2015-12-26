@@ -39,7 +39,7 @@ int main()
 
             case BALL_SEARCH:
                 
-                if(timer >= 60){
+                if(timer >= 320){
                     state = TIMER;
                     break;
                 }
@@ -198,6 +198,7 @@ int main()
               // printf("ballcount = %d\n",ballcount);///////@@
                 cup = OFF;
                 if(deptharea == ON) MoveLineTrace(last_distance);
+                ballcolor_1st = ballcolor_2nd = NO_BALL;
                 state = BALL_SEARCH;
 
                 break;

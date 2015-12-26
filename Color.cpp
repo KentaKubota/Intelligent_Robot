@@ -47,7 +47,7 @@ int WhatColor(){
     get_color_value();
     printf("R:%d G:%d B:%d IR:%d\n",R,G,B,IR);
 
-    if(IR >= 13) return NO_BALL;
+    if(IR >= 17) return NO_BALL;
 
     if(B <= 22)      return RED;
     else if(R <= 22) return BLUE;
