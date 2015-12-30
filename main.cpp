@@ -4,8 +4,16 @@
 #define AIM_NUM 15
 #define RIGHT 0
 #define LEFT  1
+#define ON  1
+#define OFF 0
+#define FREE_BALL   1
+#define BALL_SEARCH 2
+#define BALL_CATCH  3 
+#define BALL_SHOOT  4
+#define GO_HOME     5
+#define TIMER       6
 
-int cup = OFF;
+
 
 int main()
 {
@@ -96,7 +104,7 @@ int main()
                 else Turn(175 - get_angle1, 160);
 
                 if(deptharea == OFF){
-                    targetSpeed_r = targetSpeed_l = -150;
+                    target_speed_r = target_speed_l = -150;
                     wait(0.7);
                 }
                    
@@ -218,14 +226,14 @@ int main()
 
                 }
 
-                targetSpeed_l = 210;targetSpeed_r = 200; wait(2.2);
+                target_speed_l = 210;target_speed_r = 200; wait(2.2);
                 Turn(170,200);
                 for(int i = 0; i < 5; i++){
                     ServoForkAppeal();
-                    targetSpeed_r = 100;
-                    targetSpeed_l = -100;
+                    target_speed_r = 100;
+                    target_speed_l = -100;
                 }
-                targetSpeed_r = targetSpeed_l = 0;
+                target_speed_r = target_speed_l = 0;
                 end_flag = ON;
                 break;
 
@@ -239,15 +247,15 @@ int main()
                 if(deptharea == ON) LineTrace(4);
                 else LineTrace(3);
 
-                targetSpeed_l = 210;targetSpeed_r = 200; 
+                target_speed_l = 210;target_speed_r = 200; 
                 wait(2.2);
                 Turn(170,200);
                 for(int i = 0; i < 5; i++){
                     ServoForkAppeal();
-                    targetSpeed_r = 100;
-                    targetSpeed_l = -100;
+                    target_speed_r = 100;
+                    target_speed_l = -100;
                 }
-                targetSpeed_r = targetSpeed_l = 0;
+                target_speed_r = target_speed_l = 0;
                 end_flag = ON;
                 break;
 

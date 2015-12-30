@@ -1,7 +1,6 @@
 ﻿/* Color.cpp */
 #include "Function.h"
 
-
 I2C colorSensor(p9,p10);
 int R,G,B,IR; 
 
@@ -55,15 +54,3 @@ int WhatColor(){
     else             return NO_BALL;
 }
 
-
-//int WhatColor(){
-//    get_color_value();
-//    printf("R:%d G:%d B:%d IR:%d\n",R,G,B,IR);
-//
-//    if(IR >= 15)     return NO_BALL;//17 -> 15
-//    else if(R <= 18) return BLUE;
-//    else if(G >= 25) return YELLO;
-//    else if(B <= 20) return RED; 
-//    
-//    else return 1;
-//}

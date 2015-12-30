@@ -5,6 +5,7 @@
 /* Define PinNo sensor linetrace */
 DigitalIn ss1(p5),ss2(p6),ss3(p7),ss4(p8);
 
+float target_speed_r, target_speed_l; 
 
 void LineTrace(int countxline)
 {
@@ -35,46 +36,46 @@ void LineTrace(int countxline)
        switch(sw)
        {
            case 1:
-               targetSpeed_r = 220, targetSpeed_l = 480; 
+               target_speed_r = 220, target_speed_l = 480; 
                break;
 
            case 2:
-               targetSpeed_r = 480, targetSpeed_l = 220;
+               target_speed_r = 480, target_speed_l = 220;
                break;
 
            case 3:
-               targetSpeed_r = 30, targetSpeed_l = 460;
+               target_speed_r = 30, target_speed_l = 460;
                break;
 
            case 4:
-               targetSpeed_r = 460, targetSpeed_l = 30;
+               target_speed_r = 460, target_speed_l = 30;
                break;
 
            case 5:
-               targetSpeed_r = 60, targetSpeed_l = 460;
+               target_speed_r = 60, target_speed_l = 460;
                break;
 
            case 6:
-               targetSpeed_r = 460, targetSpeed_l = 60;
+               target_speed_r = 460, target_speed_l = 60;
                break;
 
            case 7:
-               targetSpeed_r = targetSpeed_l = 380;
+               target_speed_r = target_speed_l = 380;
 
                count += 1;
-               if(count == countxline) targetSpeed_r = targetSpeed_l = 240;
+               if(count == countxline) target_speed_r = target_speed_l = 240;
                //printf("count = %d\n",count);
                wait(0.09);//0.17???
                break;
 
            default:
-               targetSpeed_r = targetSpeed_l = 410;
+               target_speed_r = target_speed_l = 410;
                break;
        }
 
     sw = 0;
     } 
-    targetSpeed_r = targetSpeed_l = 0;
+    target_speed_r = target_speed_l = 0;
 }
 
 
@@ -104,27 +105,27 @@ void MoveLineTrace(float distance)
        switch(sw)
        {
            case 1:
-               targetSpeed_r = 120, targetSpeed_l = 320;//230
+               target_speed_r = 120, target_speed_l = 320;//230
                break;
 
            case 2:
-               targetSpeed_r = 320, targetSpeed_l = 120;///100 70
+               target_speed_r = 320, target_speed_l = 120;///100 70
                break;
 
            case 3:
-               targetSpeed_r = 50, targetSpeed_l = 350;
+               target_speed_r = 50, target_speed_l = 350;
                break;
 
            case 4:
-               targetSpeed_r = 350, targetSpeed_l = 50;
+               target_speed_r = 350, target_speed_l = 50;
                break;
 
            default:
-               targetSpeed_r = targetSpeed_l = 300;
+               target_speed_r = target_speed_l = 300;
                break;
        }
 
     sw = 0;
     } 
-    targetSpeed_r = targetSpeed_l = 0;
+    target_speed_r = target_speed_l = 0;
 }

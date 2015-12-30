@@ -2,6 +2,10 @@
 #include "Function.h"
 #include "QEI.h"
 
+#define PI = 3.14159;
+#define ON  1
+#define OFF 0
+
 
 /* Define PinNo motor */
 PwmOut      MotorRight(p23);
@@ -19,11 +23,11 @@ float theta_old_r = 0.0, theta_old_l = 0.0;
 float omega_r, omega_l, W;
 float velocity_r, velocity_l, V;
 float x0, x1, y0, y1, tht0, tht1;
-float targetSpeed_r, targetSpeed_l; 
 float dt = 0.02;
 float T = 132;
 float get_PSD0, get_PSD1, get_angle0, get_angle1; 
 float timer = 0;
+int cup = OFF;
 
 /* PID Control */
 void PIDCtrl_R(float target, float velocity)
@@ -87,12 +91,12 @@ void Turn(float angle,int speed)
 
     if(angle >= 0)
         while(angle >= (tht1 * 180 / PI))
-            targetSpeed_r = speed, targetSpeed_l = -speed;
+            target_speed_r = speed, target_speed_l = -speed;
     if(angle <= 0)
         while(angle <= (tht1 * 180 / PI))
-            targetSpeed_r = -speed, targetSpeed_l = speed;
+            target_speed_r = -speed, target_speed_l = speed;
 
-    targetSpeed_r = targetSpeed_l = 0;
+    target_speed_r = target_speed_l = 0;
     wait(0.1);//0.2 -> 0.1
     //printf("angle = %f\n",tht1*180/PI);
             
@@ -107,8 +111,8 @@ void SearchTurn_r()
 
     wait(0.1);//0.5 -> 0.1
     while(-86 <= (tht1 * 180 / PI)){   //right side search
-        targetSpeed_r = -110;
-        targetSpeed_l = 110;//80 -> 110
+        target_speed_r = -110;
+        target_speed_l = 110;//80 -> 110
 
         get_PSD0 = PSD_Value();
         get_angle0 = tht1 * 180 / PI;
@@ -119,7 +123,7 @@ void SearchTurn_r()
     }
     if(get_PSD1 < 0.205) get_angle1 = 0.0;//0.240
     //printf("psd = %f angle = %f\n",get_PSD1, get_angle1);
-    targetSpeed_r = targetSpeed_l = 0;
+    target_speed_r = target_speed_l = 0;
     wait(0.1);//0.2 -> 0.1
     if(get_angle1 == 0){
         Turn(84, 150);
@@ -139,8 +143,8 @@ void SearchTurn_l()
 
     wait(0.1);//0.5 -> 0.1
     while(85 >= (tht1 * 180 / PI)){   //right side search
-        targetSpeed_r = 110;
-        targetSpeed_l = -110;//80 -> 110
+        target_speed_r = 110;
+        target_speed_l = -110;//80 -> 110
 
         get_PSD0 = PSD_Value();
         get_angle0 = tht1 * 180 / PI;
@@ -151,7 +155,7 @@ void SearchTurn_l()
     }
     if(get_PSD1 < 0.205) get_angle1 = 0.0; //0.240
     //printf("psd = %f angle = %f\n",get_PSD1, get_angle1);
-    targetSpeed_r = targetSpeed_l = 0;
+    target_speed_r = target_speed_l = 0;
     wait(0.1);//0.2 -> 0.1
     if(get_angle1 == 0){
         Turn(-84, 150);
@@ -176,11 +180,11 @@ void BallApproach()
     if(Diff < 0)
     {
         while(x1 >= Diff - 20)
-            targetSpeed_r = targetSpeed_l = -180;//100 -> 180
+            target_speed_r = target_speed_l = -180;//100 -> 180
 
-        targetSpeed_r = targetSpeed_l = 0;
+        target_speed_r = target_speed_l = 0;
         ServoForkDown();
-        targetSpeed_r = targetSpeed_l = 140;//100 -> 140
+        target_speed_r = target_speed_l = 140;//100 -> 140
         waitflag = ON;
         wait(1.0);//1.2 -> 1.0
     }
@@ -188,16 +192,16 @@ void BallApproach()
     {
         ServoForkDown();
         while(x1 <= Diff + 15)//60 -> 40
-            targetSpeed_r = targetSpeed_l = 140;//100 -> 140
+            target_speed_r = target_speed_l = 140;//100 -> 140
             waitflag = OFF;
     }
-    targetSpeed_r = targetSpeed_l = 0;
+    target_speed_r = target_speed_l = 0;
     if(cup == OFF) ServoForkUp();
     else ServoForkCatch();
 
     while(x1 >= 0)
-        printf(""),targetSpeed_r = targetSpeed_l = -160;//100 -> 180
-    targetSpeed_r = targetSpeed_l = 0;
+        printf(""),target_speed_r = target_speed_l = -160;//100 -> 180
+    target_speed_r = target_speed_l = 0;
     if(waitflag == ON) wait(0.5);//0.5 -> 0.3
 }
 
@@ -221,8 +225,8 @@ void MotorCtrl()
     x1 = x0 + V * dt * cos(tht1);
     y1 = y0 + V * dt * sin(tht1);
 
-    PIDCtrl_R(targetSpeed_r, velocity_r);
-    PIDCtrl_L(targetSpeed_l, velocity_l);
+    PIDCtrl_R(target_speed_r, velocity_r);
+    PIDCtrl_L(target_speed_l, velocity_l);
 
     timer += 0.02;
 }
