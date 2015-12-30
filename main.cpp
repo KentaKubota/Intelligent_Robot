@@ -12,8 +12,7 @@
 #define BALL_SHOOT  4
 #define GO_HOME     5
 #define TIMER       6
-
-
+#define DISTANCE    157
 
 int main()
 {
@@ -22,17 +21,15 @@ int main()
     int ballcolor_1st, ballcolor_2nd;
     int ballcount = 0;
     int deptharea = OFF;
-    int distance = 157;
-    int last_distance = 0;
+    int inte_distance = 0;
     int end_flag;
     int search_side = RIGHT;
 
-/* Initialization */
+    printf("\nStart the program\n\n");
     wait(2.5);
     ServoInit();
-    printf("\nFinish initialization\n\n");
 
-/* Start Motor Ctrl */
+/* Start Timer Interrput */
     SwitchMotorCtrl(ON);    
 
     state = FREE_BALL;
@@ -62,9 +59,9 @@ int main()
                 else{
                     SearchTurn_l();
                     if(get_angle1 == 0){
-                        if(last_distance / 157 < 7){
-                            MoveLineTrace(distance);
-                            last_distance += 157;
+                        if(inte_distance / 157 < 7){
+                            MoveLineTrace(DISTANCE);
+                            inte_distance += 157;
                         }
                         search_side = RIGHT;
                         deptharea = ON;
@@ -205,7 +202,7 @@ int main()
 
               // printf("ballcount = %d\n",ballcount);///////@@
                 cup = OFF;
-                if(deptharea == ON) MoveLineTrace(last_distance);
+                if(deptharea == ON) MoveLineTrace(inte_distance);
                 ballcolor_1st = ballcolor_2nd = NO_BALL;
                 state = BALL_SEARCH;
 
