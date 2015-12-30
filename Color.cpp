@@ -1,5 +1,6 @@
 ﻿/* Color.cpp */
 #include "Function.h"
+#include "Color.h"
 
 I2C colorSensor(p9,p10);
 int R,G,B,IR; 

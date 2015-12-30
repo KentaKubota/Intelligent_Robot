@@ -1,5 +1,6 @@
 /*LineTrace.cpp*/
 #include "Function.h"
+#include "LineTrace.h"
 
 
 /* Define PinNo sensor linetrace */

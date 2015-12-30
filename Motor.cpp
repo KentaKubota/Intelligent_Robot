@@ -1,8 +1,9 @@
 /* Motor.cpp */
 #include "Function.h"
+#include "Motor.h"
 #include "QEI.h"
 
-#define PI = 3.14159;
+#define PI 3.14159
 #define ON  1
 #define OFF 0
 

@@ -1,5 +1,6 @@
 /* Servo.cpp */
 #include "Function.h"
+#include "Servo.h"
 
 /* Define PinNo Servo */
 Serial servo(p13, p14);

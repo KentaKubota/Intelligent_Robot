@@ -1,5 +1,6 @@
 /* PSD.cpp */
 #include "Function.h"
+#include "PSD.h"
  
 #define NUM 9
 AnalogIn PSD(p16);     

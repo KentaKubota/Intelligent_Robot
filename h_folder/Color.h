@@ -7,6 +7,6 @@
 #define YELLO 2
 #define RED 3                                                                  
 
-int whatColor();
+int WhatColor();
 
 #endif //_COLOE_H_
