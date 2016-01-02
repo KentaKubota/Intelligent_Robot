@@ -1,18 +1,20 @@
 ﻿/* main.cpp */
 #include "Function.h"
 
-#define AIM_NUM 15
-#define RIGHT 0
-#define LEFT  1
-#define ON  1
-#define OFF 0
-#define FREE_BALL   1
-#define BALL_SEARCH 2
-#define BALL_CATCH  3 
-#define BALL_SHOOT  4
-#define GO_HOME     5
-#define TIMER       6
-#define DISTANCE    157
+#define AIM_NUM         15
+#define RIGHT           0
+#define LEFT            1
+#define ON              1
+#define OFF             0
+#define FREE_BALL       1
+#define BALL_SEARCH     2
+#define BALL_CATCH      3 
+#define BALL_SHOOT      4
+#define GO_HOME         5
+#define TIMER           6
+#define TIME_LIMIT      320 //Second
+#define DISTANCE        157
+#define LIMIT_DISTANCE  DISTANCE * 7
 
 int main()
 {
@@ -28,8 +30,6 @@ int main()
     printf("\nStart the program\n\n");
     wait(2.5);
     ServoInit();
-
-/* Start Timer Interrput */
     SwitchMotorCtrl(ON);    
 
     state = FREE_BALL;
@@ -43,8 +43,7 @@ int main()
                 break;
 
             case BALL_SEARCH:
-                
-                if(timer >= 320){
+                if(timer >= TIME_LIMIT){ 
                     state = TIMER;
                     break;
                 }
@@ -59,9 +58,9 @@ int main()
                 else{
                     SearchTurn_l();
                     if(get_angle1 == 0){
-                        if(inte_distance / 157 < 7){
+                        if(inte_distance < LIMIT_DISTANCE){
                             MoveLineTrace(DISTANCE);
-                            inte_distance += 157;
+                            inte_distance += DISTANCE;
                         }
                         search_side = RIGHT;
                         deptharea = ON;
@@ -89,7 +88,7 @@ int main()
                     break;
                 }
                 else if(cup == OFF){
-                    if(get_angle1 <= 0) Turn(-get_angle1 - 7, 110);// 10 -> 5
+                    if(get_angle1 <= 0) Turn(-get_angle1 - 7, 110);
                     else Turn(-get_angle1 + 7, 110); 
                     cup = ON;                            
                     state = BALL_SEARCH;                 
@@ -97,16 +96,14 @@ int main()
                     break;
                 }
 
-                if(search_side == RIGHT) Turn(-168 - get_angle1, 160);//175 -> 168
+                if(search_side == RIGHT) Turn(-168 - get_angle1, 160);
                 else Turn(175 - get_angle1, 160);
 
                 if(deptharea == OFF){
                     target_speed_r = target_speed_l = -150;
-                    wait(0.7);
+                    wait(0.6);
                 }
                    
-
-                //printf("ballcolor_1st = %d\n",ballcolor_1st);
                 state = BALL_SHOOT;
                 break;
 
@@ -118,7 +115,7 @@ int main()
                     Turn(167, 180);
                     ServoBallThrow();
                     ServoForkUp();
-                    wait(1);//0.5 -> 0.7
+                    wait(1);
                     ballcolor_2nd = WhatColor();
                     printf("color_2nd = %d\n",ballcolor_2nd);
                     if(ballcolor_2nd != NO_BALL) ballcount += 1;
@@ -135,12 +132,11 @@ int main()
                     }
                 }
 
-
                 if(ballcolor_1st == YELLO){
                     Turn(80, 180);
                     ServoBallThrow();
                     ServoForkUp();
-                    wait(1);//
+                    wait(1);
                     ballcolor_2nd = WhatColor();
                     printf("color_2nd = %d\n",ballcolor_2nd);
                     if(ballcolor_2nd != NO_BALL) ballcount += 1;
@@ -168,7 +164,7 @@ int main()
                     Turn(80, 180);
                     ServoBallThrow();
                     ServoForkUp();
-                    wait(1);//
+                    wait(1);
                     ballcolor_2nd = WhatColor();
                     printf("color_2nd = %d\n",ballcolor_2nd);
                     if(ballcolor_2nd != NO_BALL) ballcount += 1;
@@ -200,30 +196,27 @@ int main()
                 if(ballcolor_2nd == NO_BALL) LineTrace(ballcolor_1st);
                 else LineTrace(ballcolor_2nd);
 
-              // printf("ballcount = %d\n",ballcount);///////@@
-                cup = OFF;
                 if(deptharea == ON) MoveLineTrace(inte_distance);
+                cup = OFF;
                 ballcolor_1st = ballcolor_2nd = NO_BALL;
                 state = BALL_SEARCH;
-
                 break;
 
             case GO_HOME:
                 Turn(170,200);
                 if(ballcolor_2nd != NO_BALL){
-                if(ballcolor_2nd == BLUE) LineTrace(2);
-                if(ballcolor_2nd == YELLO) LineTrace(1);
-                if(ballcolor_2nd == RED); 
+                    if(ballcolor_2nd == BLUE) LineTrace(2);
+                    if(ballcolor_2nd == YELLO) LineTrace(1);
+                    if(ballcolor_2nd == RED); 
                 }
                 else {
-
-                if(ballcolor_1st == BLUE) LineTrace(2);
-                if(ballcolor_1st == YELLO) LineTrace(1);
-                if(ballcolor_1st == RED); 
-
+                    if(ballcolor_1st == BLUE) LineTrace(2);
+                    if(ballcolor_1st == YELLO) LineTrace(1);
+                    if(ballcolor_1st == RED); 
                 }
 
-                target_speed_l = 210;target_speed_r = 200; wait(2.2);
+                target_speed_l = target_speed_r = 200;
+                wait(2.2);
                 Turn(170,200);
                 for(int i = 0; i < 5; i++){
                     ServoForkAppeal();
@@ -244,7 +237,7 @@ int main()
                 if(deptharea == ON) LineTrace(4);
                 else LineTrace(3);
 
-                target_speed_l = 210;target_speed_r = 200; 
+                target_speed_l = target_speed_r = 200; 
                 wait(2.2);
                 Turn(170,200);
                 for(int i = 0; i < 5; i++){
@@ -257,7 +250,6 @@ int main()
                 break;
 
         }       
-
         if(end_flag == ON) break;
     }
     printf("\nProgram has finished");
