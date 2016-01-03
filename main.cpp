@@ -14,7 +14,7 @@
 #define TIMER           6
 #define TIME_LIMIT      320 //Second
 #define DISTANCE        157
-#define LIMIT_DISTANCE  DISTANCE * 7
+#define DISTANCE_LIMIT  DISTANCE * 7
 
 int main()
 {
@@ -58,7 +58,7 @@ int main()
                 else{
                     SearchTurn_l();
                     if(get_angle1 == 0){
-                        if(inte_distance < LIMIT_DISTANCE){
+                        if(inte_distance < DISTANCE_LIMIT){
                             MoveLineTrace(DISTANCE);
                             inte_distance += DISTANCE;
                         }
