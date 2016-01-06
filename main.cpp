@@ -1,20 +1,20 @@
 ﻿/* main.cpp */
 #include "Function.h"
 
-#define AIM_NUM         15
-#define RIGHT           0
-#define LEFT            1
-#define ON              1
-#define OFF             0
-#define FREE_BALL       1
-#define BALL_SEARCH     2
-#define BALL_CATCH      3 
-#define BALL_SHOOT      4
-#define GO_HOME         5
-#define TIMER           6
-#define TIME_LIMIT      320 //Second
-#define DISTANCE        157
-#define DISTANCE_LIMIT  DISTANCE * 7
+#define AIM_NUM             15
+#define RIGHT               0
+#define LEFT                1
+#define ON                  1
+#define OFF                 0
+#define FREE_BALL           1
+#define BALL_SEARCH         2
+#define BALL_CATCH          3 
+#define BALL_SHOOT          4
+#define GO_HOME             5
+#define TIMER               6
+#define TIME_LIMIT          320 //Second
+#define DISTANCE            157
+#define DISTANCE_LIMIT      DISTANCE * 7
 
 int main()
 {
