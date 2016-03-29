@@ -8,5 +8,3 @@ ARM社 mbed NXP LPC1768
 https://www.youtube.com/watch?v=rdXv2KwtFA4&feature=youtu.be
 
 
-# Test
-hehehe
